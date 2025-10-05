@@ -1,6 +1,28 @@
-name: pnpm
+# The add-on name used in ddev add-on commands
+name: ddev-pnpm
 
+# Scripts executed before files are copied
+pre_install_actions:
+
+# Files copied to the project’s .ddev directory
 project_files:
-  - docker-compose.pnpm.yaml
+  - commands/web/pnpm
+  - web-build/Dockerfile.pnpm
 
+# Files copied to the global ~/.ddev/ directory
+global_files:
+
+# Scripts executed after files are copied
+post_install_actions:
+
+# Scripts executed when removing the add-on
+removal_actions:
+
+# Minimum DDEV version required
 ddev_version_constraint: '>= v1.24.3'
+
+# Other add-ons this add-on depends on
+dependencies:
+
+# YAML files to read for template processing
+yaml_read_files:
