@@ -3,11 +3,11 @@
 [![last commit](https://img.shields.io/github/last-commit/jonagoldman/ddev-pnpm)](https://github.com/jonagoldman/ddev-pnpm/commits)
 [![release](https://img.shields.io/github/v/release/jonagoldman/ddev-pnpm)](https://github.com/jonagoldman/ddev-pnpm/releases/latest)
 
-# DDEV Pnpm
+# DDEV `pnpm`
 
 ## Overview
 
-This add-on integrates Pnpm into your [DDEV](https://ddev.com/) project.
+This add-on integrates `pnpm` into your [DDEV](https://ddev.com/) project.
 
 ## Installation
 
@@ -20,28 +20,32 @@ After installation, make sure to commit the `.ddev` directory to version control
 
 ## Usage
 
-| Command | Description |
-| ------- | ----------- |
-| `ddev describe` | View service status and used ports for Pnpm |
-| `ddev logs -s pnpm` | Check Pnpm logs |
-
-## Advanced Customization
-
-To change the Docker image:
-
-```bash
-ddev dotenv set .ddev/.env.pnpm --pnpm-docker-image="ddev/ddev-utilities:latest"
-ddev add-on get jonagoldman/ddev-pnpm
-ddev restart
+```sh
+ddev pnpm
 ```
 
-Make sure to commit the `.ddev/.env.pnpm` file to version control.
+Please refer to the documentation at [pnpm.io](https://pnpm.io)
 
-All customization options (use with caution):
+### Working directory
 
-| Variable | Flag | Default |
-| -------- | ---- | ------- |
-| `PNPM_DOCKER_IMAGE` | `--pnpm-docker-image` | `ddev/ddev-utilities:latest` |
+By default, this add-on assumes your `package.json` is in the root of the DDEV project.
+
+In a monorepo, such as the one below, `package.json` is in `frontend`.
+
+```md
+.
+├── .ddev
+├── backend/
+│   └── composer.json
+└── frontend/
+    └── package.json
+```
+
+To configure this addon to run PNPM commands for this example project, set a `PNPM_DIRECTORY` environment variable to `frontend`. For example: `.ddev/.env`
+
+```env
+PNPM_DIRECTORY=frontend
+```
 
 ## Credits
 
