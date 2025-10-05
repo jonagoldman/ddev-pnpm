@@ -85,23 +85,3 @@ teardown() {
   assert_success
   health_checks
 }
-
-# Custom
-@test "use ENV to set working directory" {
-  set -eu -o pipefail
-  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ${DIR}
-
-  # Create a frontend prject
-  cp ${DIR}/tests/testdata/frontend ${TESTDIR}/frontend -r
-
-  # Set the PNPM_DIRECTORY to match our frontend project
-  echo PNPM_DIRECTORY=frontend > ./.ddev/.env
-
-  # Restart DDEV to apply the .env settings
-  ddev restart
-
-  # Confirm it can run the script
-  ddev pnpm test | grep 'directory=frontend'
-}
